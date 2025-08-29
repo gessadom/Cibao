@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">  
+  <title>Memory Card Game | 16 Cards</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+  body{
+    display:flex;align-items:center;justify-content:center;
+    min-height:100vh;background:#000080;position:relative;
+  }
+  .wrapper{
+    padding:15px;background:#f8f8f8;border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    width:95vw;max-width:420px;
+  }
+  .cards,.card,.view,.details,p{
+    display:flex;align-items:center;justify-content:center;
+  }
+  .cards{width:100%;aspect-ratio:1/1;flex-wrap:wrap;justify-content:space-between;}
+  .cards .card{
+    cursor:pointer;position:relative;perspective:1000px;
+    transform-style:preserve-3d;width:23%;aspect-ratio:1/1;margin:1%;
+  }
+  .card.shake{animation:shake 0.35s ease-in-out;}
+  @keyframes shake {
+    0%,100%{transform:translateX(0);}
+    20%{transform:translateX(-10px);}
+    40%{transform:translateX(10px);}
+    60%{transform:translateX(-6px);}
+    80%{transform:translateX(6px);}
+  }
+  .card .view img{object-fit:contain;width:70%;height:70%;}
+  .cards .card .view{
+    width:100%;height:100%;user-select:none;pointer-events:none;
+    position:absolute;background:#fff;border-radius:7px;
+    backface-visibility:hidden;transition:transform 0.25s linear;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+  }
+  .card .back-view img{width:100%;height:100%;object-fit:contain;}
+  .card .front-view img{max-width:60px;}
+  .card .back-view{transform:rotateY(-180deg);}
+  .card .back-view img{max-width:200px;}
+  .card.flip .front-view{transform:rotateY(180deg);}
+  .card.flip .back-view{transform:rotateY(0);}
+  .details{
+    width:100%;margin-top:12px;padding:8px 12px;border-radius:7px;
+    background:#fff;height:auto;justify-content:center;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+  }
+  .details p{font-size:16px;}
+  .logo{position:absolute;top:10px;left:10px;}
+  .logo img{width:100px;height:auto;display:block;}
+
+  /* Popup styles */
+  .popup{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.7);display:none;
+    align-items:center;justify-content:center;z-index:1000;
+  }
+  .popup-content{
+    background:white;padding:30px;border-radius:10px;
+    text-align:center;max-width:300px;
+  }
+  .popup-content h2{margin-bottom:20px;font-size:22px;}
+  .popup-content button{
+    padding:10px 20px;border:none;background:#000080;
+    color:white;border-radius:7px;font-size:16px;cursor:pointer;
+  }
+
+  @media(max-width:400px){
+    .logo img{width:80px;}
+    .details p{font-size:14px;}
+  }
+  </style>
+</head>
+<body>
+  <div class="logo"><img src="logo1.png" alt="Logo" style="width:200px"></div>
+
+  <div class="wrapper">
+    <ul class="cards">
+      <!-- 16 cards -->
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/1.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/2.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/3.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/4.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/5.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/6.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/7.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/8.png"></div></li>
+      <!-- duplicates -->
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/1.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/2.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/3.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/4.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/5.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/6.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/7.png"></div></li>
+      <li class="card"><div class="view front-view"><img src="images/cl_3x.png"></div><div class="view back-view"><img src="images/8.png"></div></li>
+    </ul>
+    <div class="details">
+      <p class="time">Time: <span><b>60</b>s</span></p>
+    </div>
+  </div>
+
+  <!-- GAME OVER Popup -->
+  <div class="popup" id="gameOverPopup">
+    <div class="popup-content">
+      <h2 style="color:red;">GAME OVER</h2>
+      <button onclick="resetGame()">Reset Game</button>
+    </div>
+  </div>
+
+  <!-- YOU WIN Popup -->
+  <div class="popup" id="youWinPopup">
+    <div class="popup-content">
+      <h2 style="color:green;">YOU WIN 🎉</h2>
+      <button onclick="resetGame()">Play Again</button>
+    </div>
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll(".card"),
+    timeTag = document.querySelector(".time b"),
+    gameOverPopup = document.getElementById("gameOverPopup"),
+    youWinPopup = document.getElementById("youWinPopup");
+
+    let maxTime = 60;
+    let timeLeft = maxTime;
+    let matchedCard = 0;
+    let disableDeck = false;
+    let isPlaying = false;
+    let cardOne, cardTwo, timer;
+
+    function initTimer() {
+      if(timeLeft <= 0) {
+        clearInterval(timer);
+        showGameOver();
+        return;
+      }
+      timeLeft--;
+      timeTag.innerText = timeLeft;
+    }
+
+    function showGameOver() {
+      gameOverPopup.style.display = "flex";
+    }
+
+    function showYouWin() {
+      youWinPopup.style.display = "flex";
+    }
+
+    function resetGame() {
+      gameOverPopup.style.display = "none";
+      youWinPopup.style.display = "none";
+      shuffleCard();
+    }
+
+    function flipCard({target: clickedCard}) {
+      if(!isPlaying) {
+        isPlaying = true;
+        timer = setInterval(initTimer, 1000);
+      }
+      if(clickedCard !== cardOne && !disableDeck && timeLeft > 0) {
+        clickedCard.classList.add("flip");
+        if(!cardOne) return cardOne = clickedCard;
+
+        cardTwo = clickedCard;
+        disableDeck = true;
+        let cardOneImg = cardOne.querySelector(".back-view img").src,
+            cardTwoImg = cardTwo.querySelector(".back-view img").src;
+        matchCards(cardOneImg, cardTwoImg);
+      }
+    }
+
+    function matchCards(img1, img2) {
+      if(img1 === img2) {
+        matchedCard++;
+        if(matchedCard == 8 && timeLeft > 0) {
+          clearInterval(timer);
+          showYouWin(); // ✅ show YOU WIN popup
+        }
+        cardOne.removeEventListener("click", flipCard);
+        cardTwo.removeEventListener("click", flipCard);
+        cardOne = cardTwo = "";
+        return disableDeck = false;
+      }
+      setTimeout(() => {
+        cardOne.classList.add("shake");
+        cardTwo.classList.add("shake");
+      }, 600);
+      setTimeout(() => {
+        cardOne.classList.remove("shake","flip");
+        cardTwo.classList.remove("shake","flip");
+        cardOne = cardTwo = "";
+        disableDeck = false;
+      }, 1200);
+    }
+
+    function shuffleCard() {
+      timeLeft = maxTime;
+      matchedCard = 0;
+      cardOne = cardTwo = "";
+      clearInterval(timer);
+      timeTag.innerText = timeLeft;
+      disableDeck = isPlaying = false;
+
+      let arr = [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8];
+      arr.sort(() => Math.random() > 0.5 ? 1 : -1);
+
+      cards.forEach((card, index) => {
+        card.classList.remove("flip");
+        let imgTag = card.querySelector(".back-view img");
+        setTimeout(() => {
+          imgTag.src = `images/${arr[index]}.png`;
+        }, 300);
+        card.addEventListener("click", flipCard);
+      });
+    }
+
+    shuffleCard();
+    cards.forEach(card => card.addEventListener("click", flipCard));
+  </script>
+</body>
+</html>
